@@ -13,7 +13,7 @@ public class Teclado {
 		keyboard.close();
 	}
 
-	static Character LeerCaracter() {
+	static char LeerCaracter() {
 		boolean safe = false;
 		String a;
 		char b;
@@ -37,10 +37,10 @@ public class Teclado {
 		return a;
 	}
 
-	static Boolean LeerBoolean(String a, String b, String c) {
+	public static boolean LeerBoolean(String a, String b, String c) {
 		boolean result = false, safe = false;
 		byte decision;
-		System.out.printf("%s %n %t1.%s %n %t2.%s", a, b, c);
+		System.out.printf("%s\n\t%s\n\t%s", a, b, c);
 		do {
 			decision = keyboard.nextByte();
 			if (decision != 1 && decision != 2) {
@@ -55,7 +55,7 @@ public class Teclado {
 		return result;
 	}
 
-	static Boolean LeerBoolean(String a) {
+	static boolean LeerBoolean(String a) {
 		boolean result = false, safe = false;
 		String decision;
 		System.out.printf("%s", a);
@@ -74,42 +74,42 @@ public class Teclado {
 		return result;
 	}
 
-	static Byte LeerByte() {
+	static byte LeerByte() {
 		byte a;
 		System.out.println("Introduzca un numero");
 		a = keyboard.nextByte();
 		return a;
 	}
 
-	static Short LeerShort() {
+	static short LeerShort() {
 		short a;
 		System.out.println("Introduzca un numero");
 		a = keyboard.nextShort();
 		return a;
 	}
 
-	static Integer LeerInt() {
+	static int LeerInt() {
 		int a;
 		System.out.println("Introduzca un numero");
 		a = keyboard.nextInt();
 		return a;
 	}
 
-	static Long LeerLong() {
+	static long LeerLong() {
 		long a;
 		System.out.println("Introduzca un numero");
 		a = keyboard.nextLong();
 		return a;
 	}
 
-	static Float LeerFloat() {
+	static float LeerFloat() {
 		float a;
 		System.out.println("Introduzca un numero");
 		a = keyboard.nextFloat();
 		return a;
 	}
 
-	static Double LeerDouble() {
+	static double LeerDouble() {
 		double a;
 		System.out.println("Introduzca un numero");
 		a = keyboard.nextDouble();
