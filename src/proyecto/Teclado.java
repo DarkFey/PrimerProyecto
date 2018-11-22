@@ -9,11 +9,14 @@ public class Teclado {
 		Mayor, Menor, MayorIgual, MenorIgual
 	}
 
-	public static void main(String[] args) {
-
+	public enum Option_2 {
+		Incluidos, Excluidos, MaxIncluido, MinIncluido
 	}
 
+	//CIERRE DE TECLADO
+	//1.Cerrar teclado
 	static void CerrarTeclado() {
+		//1.Cerrar teclado
 		keyboard.close();
 	}
 
@@ -24,6 +27,7 @@ public class Teclado {
 		System.out.println("Introduzca un caracter");
 		do {
 			a = keyboard.next();
+			keyboard.nextLine();
 			if (a.length() >= 2) {
 				System.out.println("Eso no es un caracter,introduzca un caracter");
 			} else {
@@ -38,6 +42,7 @@ public class Teclado {
 		String a;
 		System.out.println("Introduzca una cadena");
 		a = keyboard.next();
+		keyboard.nextLine();
 		return a;
 	}
 
@@ -65,6 +70,7 @@ public class Teclado {
 		System.out.printf("%s", a);
 		do {
 			decision = keyboard.next();
+			keyboard.nextLine();
 			decision = decision.toLowerCase();
 			if (decision != "s" && decision != "n") {
 				System.out.println("Introduce un valor valido");
@@ -358,7 +364,7 @@ public class Teclado {
 		//Se comprueba el enum para designar una pregunta
 		if (y == Option.Mayor) {
 			//Petición de digito
-			System.out.printf("Introduzca un numero mayor a %d", x);
+			System.out.printf("Introduzca un numero mayor a %.0f", x);
 			//Bucle de seguridad
 			do {
 				a = keyboard.nextFloat();
@@ -370,7 +376,7 @@ public class Teclado {
 			} while (safe = false);
 		} else if (y == Option.Menor) {
 			//Petición de digito
-			System.out.printf("Introduzca un numero menor a %d", x);
+			System.out.printf("Introduzca un numero menor a %.0f", x);
 			//Bucle de seguridad
 			do {
 				a = keyboard.nextFloat();
@@ -382,7 +388,7 @@ public class Teclado {
 			} while (safe = false);
 		} else if (y == Option.MayorIgual) {
 			//Petición de digito
-			System.out.printf("Introduzca un numero mayor o igual a %d", x);
+			System.out.printf("Introduzca un numero mayor o igual a %.0f", x);
 			//Bucle de seguridad
 			do {
 				a = keyboard.nextFloat();
@@ -394,7 +400,7 @@ public class Teclado {
 			} while (safe = false);
 		} else if (y == Option.MenorIgual) {
 			//Petición de digito
-			System.out.printf("Introduzca un numero menor o igual a %d", x);
+			System.out.printf("Introduzca un numero menor o igual a %.0f", x);
 			//Bucle de seguridad
 			do {
 				a = keyboard.nextFloat();
@@ -413,10 +419,9 @@ public class Teclado {
 	static Double LeerNumParametro(double x, Option y) {
 		double a = 0;
 		boolean safe = false;
-		//Se comprueba el enum para designar una pregunta
 		if (y == Option.Mayor) {
 			//Petición de digito
-			System.out.printf("Introduzca un numero mayor a %d", x);
+			System.out.printf("Introduzca un numero mayor a %.0f", x);
 			//Bucle de seguridad
 			do {
 				a = keyboard.nextDouble();
@@ -428,7 +433,7 @@ public class Teclado {
 			} while (safe = false);
 		} else if (y == Option.Menor) {
 			//Petición de digito
-			System.out.printf("Introduzca un numero menor a %d", x);
+			System.out.printf("Introduzca un numero menor a %.0f", x);
 			//Bucle de seguridad
 			do {
 				a = keyboard.nextDouble();
@@ -440,7 +445,7 @@ public class Teclado {
 			} while (safe = false);
 		} else if (y == Option.MayorIgual) {
 			//Petición de digito
-			System.out.printf("Introduzca un numero mayor o igual a %d", x);
+			System.out.printf("Introduzca un numero mayor o igual a %.0f", x);
 			//Bucle de seguridad
 			do {
 				a = keyboard.nextDouble();
@@ -452,7 +457,7 @@ public class Teclado {
 			} while (safe = false);
 		} else if (y == Option.MenorIgual) {
 			//Petición de digito
-			System.out.printf("Introduzca un numero menor o igual a %d", x);
+			System.out.printf("Introduzca un numero menor o igual a %.0f", x);
 			//Bucle de seguridad
 			do {
 				a = keyboard.nextDouble();
@@ -466,5 +471,395 @@ public class Teclado {
 			System.out.println("Error en el enum");
 		}
 		return a;
+	}
+
+	//LECTURA DE UN DIGITO EN UN RANGO
+	//1.Comprobación de rango,si no es valido,información del error
+	//2.Designar tipo de rango
+	//3.Petición del digito
+	//4.Comprobación de digito,si no es valido se le vuelve pedir
+	//5.Devolver digito
+	static Byte LeerNumRango(byte nmin, byte nmax, Option_2 x) {
+		byte num = 0;
+		boolean safe = false;
+		//1.Comprobación de parametros,si no es valido,salta error
+		if (nmin > nmax) {
+			throw new IllegalArgumentException("Error en los valores del rango,vuelve a intertarlo");
+		} else {
+		}
+		//2.Designar tipo de rango
+		if (x == Option_2.Incluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextByte();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.Excluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextByte();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MaxIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextByte();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MinIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextByte();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else {
+			System.out.println("Error en el enum");
+		}
+		//5.Devolver digito
+		return num;
+	}
+
+	static Short LeerNumRango(short nmin, short nmax, Option_2 x) {
+		short num = 0;
+		boolean safe = false;
+		//1.Comprobación de parametros,si no es valido,salta error
+		if (nmin > nmax) {
+			throw new IllegalArgumentException("Error en los valores del rango,vuelve a intertarlo");
+		} else {
+		}
+		//2.Designar tipo de rango
+		if (x == Option_2.Incluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextShort();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.Excluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextShort();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MaxIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextShort();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MinIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextShort();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else {
+			System.out.println("Error en el enum");
+		}
+		//5.Devolver digito
+		return num;
+	}
+
+	static Integer LeerNumRango(int nmin, int nmax, Option_2 x) {
+		int num = 0;
+		boolean safe = false;
+		//1.Comprobación de parametros,si no es valido,salta error
+		if (nmin > nmax) {
+			throw new IllegalArgumentException("Error en los valores del rango,vuelve a intertarlo");
+		} else {
+		}
+		//2.Designar tipo de rango
+		if (x == Option_2.Incluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextInt();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.Excluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextInt();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MaxIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextInt();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MinIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextInt();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else {
+			System.out.println("Error en el enum");
+		}
+		//5.Devolver digito
+		return num;
+	}
+
+	static Long LeerNumRango(long nmin, long nmax, Option_2 x) {
+		long num = 0;
+		boolean safe = false;
+		//1.Comprobación de parametros,si no es valido,salta error
+		if (nmin > nmax) {
+			throw new IllegalArgumentException("Error en los valores del rango,vuelve a intertarlo");
+		} else {
+		}
+		//2.Designar tipo de rango
+		if (x == Option_2.Incluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextLong();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.Excluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextLong();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MaxIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextLong();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MinIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
+			do {
+				num = keyboard.nextLong();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else {
+			System.out.println("Error en el enum");
+		}
+		//5.Devolver digito
+		return num;
+	}
+
+	static Float LeerNumRango(float nmin, float nmax, Option_2 x) {
+		float num = 0;
+		boolean safe = false;
+		//1.Comprobación de parametros,si no es valido,salta error
+		if (nmin > nmax) {
+			throw new IllegalArgumentException("Error en los valores del rango,vuelve a intertarlo");
+		} else {
+		}
+		//2.Designar tipo de rango
+		if (x == Option_2.Incluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
+			do {
+				num = keyboard.nextFloat();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.Excluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
+			do {
+				num = keyboard.nextFloat();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MaxIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
+			do {
+				num = keyboard.nextFloat();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MinIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
+			do {
+				num = keyboard.nextFloat();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else {
+			System.out.println("Error en el enum");
+		}
+		//5.Devolver digito
+		return num;
+	}
+
+	static Double LeerNumRango(double nmin, double nmax, Option_2 x) {
+		double num = 0;
+		boolean safe = false;
+		//1.Comprobación de parametros,si no es valido,salta error
+		if (nmin > nmax) {
+			throw new IllegalArgumentException("Error en los valores del rango,vuelve a intertarlo");
+		} else {
+		}
+		//2.Designar tipo de rango
+		if (x == Option_2.Incluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
+			do {
+				num = keyboard.nextDouble();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.Excluidos) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
+			do {
+				num = keyboard.nextDouble();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MaxIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
+			do {
+				num = keyboard.nextDouble();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num <= nmin || num > nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else if (x == Option_2.MinIncluido) {
+			//3.Petición del digito
+			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
+			do {
+				num = keyboard.nextDouble();
+				//4.Comprobación de digito,si no es valido se le vuelve pedir
+				if (num < nmin || num >= nmax) {
+					System.out.println("Valor no deseado,intente de nuevo");
+				} else {
+					safe = true;
+				}
+			} while (safe = false);
+		} else {
+			System.out.println("Error en el enum");
+		}
+		//5.Devolver digito
+		return num;
 	}
 }
