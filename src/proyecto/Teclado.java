@@ -45,10 +45,9 @@ public class Teclado {
 		return b;
 	}
 
-	/*LECTURA DE CADENA
-	 * 1.Petición de la cadena
-	 * 2.Devolver cadena
-	 */
+	//LECTURA DE CADENA
+	//1.Petición de la cadena
+	//2.Devolver cadena
 	static String LeerCadena() {
 		String a;
 		//1.Petición de la cadena
