@@ -2,16 +2,11 @@ package proyecto;
 
 import java.util.Scanner;
 
+import proyecto.Options.Option;
+import proyecto.Options.Option_2;
+
 public class Teclado {
-	static Scanner keyboard;
-
-	public enum Option {
-		Mayor, Menor, MayorIgual, MenorIgual
-	}
-
-	public enum Option_2 {
-		Incluidos, Excluidos, MaxIncluido, MinIncluido
-	}
+	static Scanner keyboard = new Scanner(System.in);
 
 	//CIERRE DE TECLADO
 	//1.Cerrar teclado
@@ -24,7 +19,7 @@ public class Teclado {
 	//1.Peticion del caracter
 	//2.Comprobación del caracter;si no lo es, volver a pedirselo
 	//3.Devolver caracter
-	static Character LeerCaracter() {
+	static char LeerCaracter() {
 		boolean safe = false;
 		String a;
 		char b;
@@ -39,7 +34,7 @@ public class Teclado {
 			} else {
 				safe = true;
 			}
-		} while (safe = false);
+		} while (safe == false);
 		b = a.charAt(0);
 		//3.Devolver caracter
 		return b;
@@ -62,11 +57,11 @@ public class Teclado {
 	//1.Realizar la pregunta
 	//2.Comprobación de la respuesta;si es un valor no valido,volver a pedirlo
 	//3.Devolver respuesta
-	static Boolean LeerBoolean(String a, String b, String c) {
+	static boolean LeerBoolean(String a, String b, String c) {
 		boolean result = false, safe = false;
 		byte decision;
 		//1.Realizar la pregunta
-		System.out.printf("%s %n %t1.%s %n %t2.%s", a, b, c);
+		System.out.printf("%s %n 1.%s %n 2.%s ", a, b, c);
 		//2.Comprobación de la respuesta;si es un valor no valido,volver a pedirlo
 		do {
 			decision = keyboard.nextByte();
@@ -75,10 +70,10 @@ public class Teclado {
 			} else if (decision == 1) {
 				result = true;
 				safe = true;
-			} else {
+			} else if (decision == 2) {
 				safe = true;
 			}
-		} while (safe = false);
+		} while (safe == false);
 		//3.Devolver respuesta
 		return result;
 	}
@@ -87,25 +82,24 @@ public class Teclado {
 	//1.Realizar la pregunta
 	//2.Comprobación de la respuesta;si es un valor no valido,volver a pedirlo
 	//3.Devolver respuesta
-	static Boolean LeerBoolean(String a) {
+	static boolean LeerBoolean(String a) {
 		boolean result = false, safe = false;
 		String decision;
 		//1.Realizar la pregunta
 		System.out.printf("%s", a);
 		//2.Comprobación de la respuesta;si es un valor no valido,volver a pedirlo
 		do {
-			decision = keyboard.next();
-			keyboard.nextLine();
-			decision = decision.toLowerCase();
-			if (decision != "s" && decision != "n") {
-				System.out.println("Introduce un valor valido");
-			} else if (decision == "s") {
+			decision = keyboard.nextLine();
+			//			decision = decision.toLowerCase();
+			if (decision.equals("s")) {
 				result = true;
 				safe = true;
-			} else {
+			} else if (decision.equals("n")) {
 				safe = true;
+			} else {
+				System.out.println("Introduce un valor valido");
 			}
-		} while (safe = false);
+		} while (safe == false);
 		//3.Devolver respuesta
 		return result;
 	}
@@ -113,7 +107,7 @@ public class Teclado {
 	//LECTURA DE UN DIGITO
 	//1.Petición del digito
 	//2.Devolver digito
-	static Byte LeerByte() {
+	static byte LeerByte() {
 		byte a;
 		//1.Petición del digito
 		System.out.println("Introduzca un numero");
@@ -122,7 +116,7 @@ public class Teclado {
 		return a;
 	}
 
-	static Short LeerShort() {
+	static short LeerShort() {
 		short a;
 		//1.Petición del digito
 		System.out.println("Introduzca un numero");
@@ -131,7 +125,7 @@ public class Teclado {
 		return a;
 	}
 
-	static Integer LeerInt() {
+	static int LeerInt() {
 		int a;
 		//1.Petición del digito
 		System.out.println("Introduzca un numero");
@@ -140,7 +134,7 @@ public class Teclado {
 		return a;
 	}
 
-	static Long LeerLong() {
+	static long LeerLong() {
 		long a;
 		//1.Petición del digito
 		System.out.println("Introduzca un numero");
@@ -149,7 +143,7 @@ public class Teclado {
 		return a;
 	}
 
-	static Float LeerFloat() {
+	static float LeerFloat() {
 		float a;
 		//1.Petición del digito
 		System.out.println("Introduzca un numero");
@@ -158,7 +152,7 @@ public class Teclado {
 		return a;
 	}
 
-	static Double LeerDouble() {
+	static double LeerDouble() {
 		double a;
 		//1.Petición del digito
 		System.out.println("Introduzca un numero");
@@ -172,13 +166,13 @@ public class Teclado {
 	//2.Petición del digito
 	//3.Comprobación de digito,si no es valido se le vuelve pedir
 	//4.Devolver digito
-	static Byte LeerNumParametro(byte x, Option y) {
+	static byte LeerNumParametro(byte x, Option y) {
 		byte a = 0;
 		boolean safe = false;
 		//1.Designar pregunta
 		if (y == Option.Mayor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor a %d", x);
+			System.out.printf("Introduzca un numero mayor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
 				a = keyboard.nextByte();
@@ -187,10 +181,10 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.Menor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero menor a %d", x);
+			System.out.printf("Introduzca un numero menor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
 				a = keyboard.nextByte();
@@ -199,10 +193,10 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MayorIgual) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor o igual a %d", x);
+			System.out.printf("Introduzca un numero mayor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
 				a = keyboard.nextByte();
@@ -211,10 +205,10 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MenorIgual) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero menor o igual a %d", x);
+			System.out.printf("Introduzca un numero menor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
 				a = keyboard.nextByte();
@@ -223,7 +217,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
@@ -231,58 +225,58 @@ public class Teclado {
 		return a;
 	}
 
-	static Short LeerNumParametro(short x, Option y) {
+	static short LeerNumParametro(short x, Option y) {
 		short a = 0;
 		boolean safe = false;
 		//1.Designar pregunta
 		if (y == Option.Mayor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor a %d", x);
+			System.out.printf("Introduzca un numero mayor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextShort();
+				a = keyboard.nextByte();
 				if (a <= x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.Menor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero menor a %d", x);
+			System.out.printf("Introduzca un numero menor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextShort();
+				a = keyboard.nextByte();
 				if (a >= x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MayorIgual) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor o igual a %d", x);
+			System.out.printf("Introduzca un numero mayor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextShort();
+				a = keyboard.nextByte();
 				if (a < x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MenorIgual) {
-			///2.Petición del digito
-			System.out.printf("Introduzca un numero menor o igual a %d", x);
+			//2.Petición del digito
+			System.out.printf("Introduzca un numero menor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextShort();
+				a = keyboard.nextByte();
 				if (a > x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
@@ -290,58 +284,58 @@ public class Teclado {
 		return a;
 	}
 
-	static Integer LeerNumParametro(int x, Option y) {
+	static int LeerNumParametro(int x, Option y) {
 		int a = 0;
 		boolean safe = false;
 		//1.Designar pregunta
 		if (y == Option.Mayor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor a %d", x);
+			System.out.printf("Introduzca un numero mayor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextInt();
+				a = keyboard.nextByte();
 				if (a <= x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.Menor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero menor a %d", x);
+			System.out.printf("Introduzca un numero menor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextInt();
+				a = keyboard.nextByte();
 				if (a >= x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MayorIgual) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor o igual a %d", x);
+			System.out.printf("Introduzca un numero mayor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextInt();
+				a = keyboard.nextByte();
 				if (a < x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MenorIgual) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero menor o igual a %d", x);
+			System.out.printf("Introduzca un numero menor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextInt();
+				a = keyboard.nextByte();
 				if (a > x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
@@ -349,58 +343,58 @@ public class Teclado {
 		return a;
 	}
 
-	static Long LeerNumParametro(long x, Option y) {
+	static long LeerNumParametro(long x, Option y) {
 		long a = 0;
 		boolean safe = false;
 		//1.Designar pregunta
 		if (y == Option.Mayor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor a %d", x);
+			System.out.printf("Introduzca un numero mayor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextLong();
+				a = keyboard.nextByte();
 				if (a <= x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.Menor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero menor a %d", x);
+			System.out.printf("Introduzca un numero menor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextLong();
+				a = keyboard.nextByte();
 				if (a >= x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MayorIgual) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor o igual a %d", x);
+			System.out.printf("Introduzca un numero mayor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextLong();
+				a = keyboard.nextByte();
 				if (a < x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MenorIgual) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero menor o igual a %d", x);
+			System.out.printf("Introduzca un numero menor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextLong();
+				a = keyboard.nextByte();
 				if (a > x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
@@ -408,58 +402,58 @@ public class Teclado {
 		return a;
 	}
 
-	static Float LeerNumParametro(float x, Option y) {
+	static float LeerNumParametro(float x, Option y) {
 		float a = 0;
 		boolean safe = false;
 		//1.Designar pregunta
 		if (y == Option.Mayor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor a %.0f", x);
+			System.out.printf("Introduzca un numero mayor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextFloat();
+				a = keyboard.nextByte();
 				if (a <= x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.Menor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero menor a %.0f", x);
+			System.out.printf("Introduzca un numero menor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextFloat();
+				a = keyboard.nextByte();
 				if (a >= x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MayorIgual) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor o igual a %.0f", x);
+			System.out.printf("Introduzca un numero mayor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextFloat();
+				a = keyboard.nextByte();
 				if (a < x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MenorIgual) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero menor o igual a %.0f", x);
+			System.out.printf("Introduzca un numero menor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextFloat();
+				a = keyboard.nextByte();
 				if (a > x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
@@ -467,58 +461,58 @@ public class Teclado {
 		return a;
 	}
 
-	static Double LeerNumParametro(double x, Option y) {
+	static double LeerNumParametro(double x, Option y) {
 		double a = 0;
 		boolean safe = false;
 		//1.Designar pregunta
 		if (y == Option.Mayor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor a %.0f", x);
+			System.out.printf("Introduzca un numero mayor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextDouble();
+				a = keyboard.nextByte();
 				if (a <= x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.Menor) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero menor a %.0f", x);
+			System.out.printf("Introduzca un numero menor a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextDouble();
+				a = keyboard.nextByte();
 				if (a >= x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MayorIgual) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero mayor o igual a %.0f", x);
+			System.out.printf("Introduzca un numero mayor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextDouble();
+				a = keyboard.nextByte();
 				if (a < x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (y == Option.MenorIgual) {
 			//2.Petición del digito
-			System.out.printf("Introduzca un numero menor o igual a %.0f", x);
+			System.out.printf("Introduzca un numero menor o igual a %d %n", x);
 			//3.Comprobación de digito,si no es valido se le vuelve pedir
 			do {
-				a = keyboard.nextDouble();
+				a = keyboard.nextByte();
 				if (a > x) {
 					System.out.println("Valor no deseado,intente de nuevo");
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
@@ -532,7 +526,7 @@ public class Teclado {
 	//3.Petición del digito
 	//4.Comprobación de digito,si no es valido se le vuelve pedir
 	//5.Devolver digito
-	static Byte LeerNumRango(byte nmin, byte nmax, Option_2 x) {
+	static byte LeerNumRango(byte nmin, byte nmax, Option_2 x) {
 		byte num = 0;
 		boolean safe = false;
 		//1.Comprobación de parametros,si no es valido,salta error
@@ -552,7 +546,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.Excluidos) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -564,7 +558,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MaxIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -576,7 +570,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MinIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -588,7 +582,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
@@ -596,7 +590,7 @@ public class Teclado {
 		return num;
 	}
 
-	static Short LeerNumRango(short nmin, short nmax, Option_2 x) {
+	static short LeerNumRango(short nmin, short nmax, Option_2 x) {
 		short num = 0;
 		boolean safe = false;
 		//1.Comprobación de parametros,si no es valido,salta error
@@ -616,7 +610,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.Excluidos) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -628,7 +622,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MaxIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -640,7 +634,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MinIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -652,7 +646,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
@@ -660,7 +654,7 @@ public class Teclado {
 		return num;
 	}
 
-	static Integer LeerNumRango(int nmin, int nmax, Option_2 x) {
+	static int LeerNumRango(int nmin, int nmax, Option_2 x) {
 		int num = 0;
 		boolean safe = false;
 		//1.Comprobación de parametros,si no es valido,salta error
@@ -680,7 +674,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.Excluidos) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -692,7 +686,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MaxIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -704,7 +698,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MinIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -716,7 +710,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
@@ -724,7 +718,7 @@ public class Teclado {
 		return num;
 	}
 
-	static Long LeerNumRango(long nmin, long nmax, Option_2 x) {
+	static long LeerNumRango(long nmin, long nmax, Option_2 x) {
 		long num = 0;
 		boolean safe = false;
 		//1.Comprobación de parametros,si no es valido,salta error
@@ -744,7 +738,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.Excluidos) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -756,7 +750,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MaxIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -768,7 +762,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MinIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %d y %d", nmin, nmax);
@@ -780,7 +774,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
@@ -788,7 +782,7 @@ public class Teclado {
 		return num;
 	}
 
-	static Float LeerNumRango(float nmin, float nmax, Option_2 x) {
+	static float LeerNumRango(float nmin, float nmax, Option_2 x) {
 		float num = 0;
 		boolean safe = false;
 		//1.Comprobación de parametros,si no es valido,salta error
@@ -808,7 +802,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.Excluidos) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
@@ -820,7 +814,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MaxIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
@@ -832,7 +826,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MinIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
@@ -844,7 +838,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
@@ -852,7 +846,7 @@ public class Teclado {
 		return num;
 	}
 
-	static Double LeerNumRango(double nmin, double nmax, Option_2 x) {
+	static double LeerNumRango(double nmin, double nmax, Option_2 x) {
 		double num = 0;
 		boolean safe = false;
 		//1.Comprobación de parametros,si no es valido,salta error
@@ -872,7 +866,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.Excluidos) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
@@ -884,7 +878,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MaxIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
@@ -896,7 +890,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else if (x == Option_2.MinIncluido) {
 			//3.Petición del digito
 			System.out.printf("Introduzca un valor comprendido entre %.2f y %.2f", nmin, nmax);
@@ -908,7 +902,7 @@ public class Teclado {
 				} else {
 					safe = true;
 				}
-			} while (safe = false);
+			} while (safe == false);
 		} else {
 			System.out.println("Error en el enum");
 		}
